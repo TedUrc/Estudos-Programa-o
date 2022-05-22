@@ -36,7 +36,7 @@ int main(){
     {
         printf("\n%d/0%d/%d\n", data[0], data[1], data[2]);
     }
-    
+
     semana = 31 - data[0];
     if(semana == 7){
         printf("Primeira semana!");
@@ -53,6 +53,6 @@ int main(){
     {
         printf("Quarta semana");
     }
-    
-    return 0;
+
+    return 1;
 }
