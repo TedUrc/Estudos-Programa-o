@@ -14,11 +14,11 @@ int main(){
 
     mediaPond = (primeiraProva + segundaProva + terceiraProva) / (1 + 1 + 3);
     if(mediaPond >= 6){
-        printf("Media: %f", mediaPond);
+        printf("Media: %.1f", mediaPond);
         printf("\nAprovado!");
     }
     else{
-        printf("Media: %f", mediaPond);
+        printf("Media: %.1f", mediaPond);
         printf("\nReprovado!");
     }
     return 0;
