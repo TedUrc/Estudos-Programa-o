@@ -54,5 +54,5 @@ int main(){
         printf("Quarta semana");
     }
 
-    return 1;
+    return 0;
 }
