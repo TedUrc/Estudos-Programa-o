@@ -12,6 +12,7 @@ struct vagao
 
 vagao *primeiro;
 
+// insere valor dentro das estruturas. A primeira estrutura o valor é retornado, a partir do segundo os valores preenchidos são referenciados.
 vagao *inserir_formulario(vagao *referencia, int numeroV, char *nomeProduto)
 {
     vagao *novoVagao = (vagao *)malloc(sizeof(vagao));
@@ -39,6 +40,32 @@ vagao *inserir_formulario(vagao *referencia, int numeroV, char *nomeProduto)
     }
 }
 
+// exclui a estrutura que você escolheu. A estrutura excluída é escolhida pelo o número do vagão
+vagao excluir_vagao(vagao *referencia, int numeroVagao)
+{
+    vagao *vagaoAnterior = referencia;
+    puts("Procurando vagao");
+    if(referencia == NULL)
+    {
+        puts("ERRO: Nao existe vagao!");
+    }
+    else
+    {    
+        while(referencia->proximoVagao != NULL || numeroVagao != referencia->numeroVagao)
+        {
+            if(vagaoAnterior->proximoVagao->proximoVagao != NULL)
+            {
+                vagaoAnterior = vagaoAnterior->proximoVagao;
+            }
+            referencia = referencia->proximoVagao;
+        }
+
+        vagaoAnterior->proximoVagao = referencia->proximoVagao;
+        free(referencia);
+    }
+}
+
+// imprime na tela os valores dentro das estruturas
 void informa_vagao(vagao *referencia)
 {
     while(referencia != NULL)
@@ -54,6 +81,8 @@ int main()
     primeiro = inserir_formulario(primeiro, 1, "Ferro");
     inserir_formulario(primeiro, 2, "Bauxita");
     inserir_formulario(primeiro, 3, "Algodao");
+
+    excluir_vagao(primeiro, 3);
 
     informa_vagao(primeiro);
 
