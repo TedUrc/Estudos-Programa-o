@@ -40,6 +40,39 @@ vagao *inserir_formulario(vagao *referencia, int numeroVg, char *produtoNome)
     }
 }
 
+vagao *excluir_vagao(vagao *referencia, int numeroVagao)
+{
+    vagao *novoVagao = referencia;
+    if(referencia == NULL)
+    {
+        puts("ERRO: Nao existe vagao preenchido!");
+    }
+    else
+    {
+        if(referencia->numeroVagao == numeroVagao)
+        {
+            novoVagao = novoVagao->proximoVagao;
+            novoVagao->anteriorVagao = referencia->anteriorVagao;
+            free(referencia);
+            return novoVagao;
+        }
+        else
+        {
+            while(referencia->proximoVagao != NULL || referencia->numeroVagao != numeroVagao)
+            {
+                if(novoVagao->proximoVagao->numeroVagao != numeroVagao)
+                {
+                    novoVagao = novoVagao->proximoVagao;
+                }
+                referencia = referencia->proximoVagao;
+            }
+
+            novoVagao->proximoVagao = referencia->proximoVagao;
+            referencia->proximoVagao->anteriorVagao = novoVagao;
+            free(referencia);
+        }
+    }
+}
 
 void informe_vagao(int numVagao)
 {
@@ -91,6 +124,7 @@ int main()
     inserir_formulario(primeiro, 2, "Bauxita");
     inserir_formulario(primeiro, 3, "Malaquita");
 
-    informe_vagao(2);
+    primeiro = excluir_vagao(primeiro, 1);
+    informe_vagao(1);
     return 0;
 }
