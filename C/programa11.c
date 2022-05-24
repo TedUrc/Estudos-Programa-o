@@ -41,27 +41,36 @@ vagao *inserir_formulario(vagao *referencia, int numeroV, char *nomeProduto)
 }
 
 // exclui a estrutura que você escolheu. A estrutura excluída é escolhida pelo o número do vagão
-vagao excluir_vagao(vagao *referencia, int numeroVagao)
+vagao *excluir_vagao(vagao *referencia, int numeroVagao)
 {
     vagao *vagaoAnterior = referencia;
-    puts("Procurando vagao");
     if(referencia == NULL)
     {
         puts("ERRO: Nao existe vagao preenchido!");
     }
     else
-    {    
-        while(referencia->proximoVagao != NULL || numeroVagao != referencia->numeroVagao)
+    {   
+        if(numeroVagao == referencia->numeroVagao)
         {
-            if(vagaoAnterior->proximoVagao->proximoVagao != NULL)
-            {
-                vagaoAnterior = vagaoAnterior->proximoVagao;
-            }
-            referencia = referencia->proximoVagao;
+            vagaoAnterior = vagaoAnterior->proximoVagao;
+            free(referencia);
+            return vagaoAnterior;
         }
+        else
+        {
+            while(referencia->proximoVagao != NULL && referencia->numeroVagao != numeroVagao)
+            {
+    
+                if(vagaoAnterior->proximoVagao->numeroVagao != numeroVagao)
+                {
+                    vagaoAnterior = vagaoAnterior->proximoVagao;
+                }
+                referencia = referencia->proximoVagao;
+            }
 
-        vagaoAnterior->proximoVagao = referencia->proximoVagao;
-        free(referencia);
+            vagaoAnterior->proximoVagao = referencia->proximoVagao;
+            free(referencia);
+        }
     }
 }
 
@@ -81,8 +90,11 @@ int main()
     primeiro = inserir_formulario(primeiro, 1, "Ferro");
     inserir_formulario(primeiro, 2, "Bauxita");
     inserir_formulario(primeiro, 3, "Algodao");
+    inserir_formulario(primeiro, 4, "Malaquita");
 
-    excluir_vagao(primeiro, 3);
+    primeiro = excluir_vagao(primeiro, 1);
+    primeiro = excluir_vagao(primeiro, 2);
+    excluir_vagao(primeiro, 4);
 
     informa_vagao(primeiro);
 
