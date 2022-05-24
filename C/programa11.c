@@ -47,7 +47,7 @@ vagao excluir_vagao(vagao *referencia, int numeroVagao)
     puts("Procurando vagao");
     if(referencia == NULL)
     {
-        puts("ERRO: Nao existe vagao!");
+        puts("ERRO: Nao existe vagao preenchido!");
     }
     else
     {    
