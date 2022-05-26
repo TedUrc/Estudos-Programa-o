@@ -61,4 +61,6 @@ int main()
     printf("Cedula de 5: %d\n", cedCinco);
     printf("Cedula de 2: %d\n", cedDois);
     printf("Cedula de 1: %d\n", cedUm);
+
+    return 0;
 }
