@@ -26,8 +26,7 @@ arvore *criar_arvore(arvore *referencia, int numero)
     {
         if(referencia->dir != NULL && referencia->info < numero)
         {
-            referencia = referencia->dir;
-            criar_arvore(referencia, numero);
+            criar_arvore(referencia->dir, numero);
         }
         else if(referencia->dir == NULL && referencia->info < numero)
         {
@@ -36,11 +35,10 @@ arvore *criar_arvore(arvore *referencia, int numero)
             criarArvore->esq = NULL;
             referencia->dir = criarArvore;
         }
-        
+
         if(referencia->esq != NULL && referencia->info > numero)
         {
-            referencia = referencia->esq;
-            criar_arvore(referencia, numero);
+            criar_arvore(referencia->esq, numero);
         }
         else if(referencia->esq == NULL && referencia->info > numero)
         {
@@ -57,12 +55,42 @@ void informa_arvore(arvore *referencia)
     if(referencia != NULL)
     {
         printf("Numero: %d\n", referencia->info);
-        informa_arvore(referencia->dir);
-        informa_arvore(referencia->esq);
+        if(referencia->dir != NULL)
+        {
+            informa_arvore(referencia->dir);
+        }
+        if(referencia->esq != NULL)
+        {
+            informa_arvore(referencia->esq);
+        }
     }
     else
     {
         puts("Arvore VAZIA!");
+    }
+}
+
+arvore *deleta_arvore(arvore *referencia)
+{
+    if(referencia != NULL)
+    {
+        if(referencia->dir != NULL)
+        {
+            deleta_arvore(referencia->dir);
+        }
+        if(referencia->esq != NULL)
+        {
+            deleta_arvore(referencia->esq);
+        }
+        free(referencia);
+        if(referencia == primeiraArvore)
+        {
+            return NULL;
+        }
+    }
+    else
+    {
+        puts("Estrutura VAZIA!");
     }
 }
 
@@ -72,6 +100,8 @@ int main()
     criar_arvore(primeiraArvore, 2);
     criar_arvore(primeiraArvore, 3);
     criar_arvore(primeiraArvore, -1);
+
+    primeiraArvore = deleta_arvore(primeiraArvore);
 
     informa_arvore(primeiraArvore);
 
