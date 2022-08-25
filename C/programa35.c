@@ -68,11 +68,11 @@ void informe_criterio(int id)
             printf("Altura: %0.2f\n", informa->altura);
             if(informa->idade >= 18 && informa->altura >= 1.70)
             {
-                puts("Pode participar da competicao!");
+                puts("Pode participar da competicao!\n");
             }
             else
             {
-                puts("Nao pode participar da competicao!");
+                puts("Nao pode participar da competicao!\n");
             }
         }
         informa = informa->proxima_pessoa;
@@ -80,7 +80,7 @@ void informe_criterio(int id)
 
     if(existe == 0)
     {
-        puts("Essa pessoa nao existe no nosso banco de dados!");
+        puts("Essa pessoa nao existe no nosso banco de dados!\n");
     }
 }
 
